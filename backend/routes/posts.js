@@ -29,10 +29,7 @@ router.post('/', authorize,  (request, response) => {
     let data = {
         userId: request.currentUser.id,
         text: request.body.text,
-        media:{
-            type: request.body.media.type,
-            url: request.body.media.url,
-        },
+        media: request.body.media,
     };
 
     PostModel.create(data, () => {
