@@ -26,18 +26,47 @@ router.post('/', authorize,  (request, response) => {
 
     // Endpoint to create a new post
 
+    let data = {
+        userId: request.currentUser.id,
+        text: request.body.text,
+        media:{
+            type: request.body.media.type,
+            url: request.body.media.url,
+        },
+    };
+
+    PostModel.create(data, () => {
+        response.status(201).json()
+    })
+
 });
 
 
 router.put('/:postId/likes', authorize, (request, response) => {
 
     // Endpoint for current user to like a post
+
+    let userId = request.currentUser.id;
+    let postId = request.params.postId;
+
+    PostModel.like(userId, postId, () => {
+        response.status(201).json()
+    });
+
+    response.json([])
 });
 
 router.delete('/:postId/likes', authorize, (request, response) => {
 
     // Endpoint for current user to unlike a post
+    let userId = request.currentUser.id;
+    let postId = request.params.postId;
 
+    PostModel.unlike(userId, postId, () => {
+        response.status(200).json()
+    });
+
+    response.json([])
 });
 
 module.exports = router;
