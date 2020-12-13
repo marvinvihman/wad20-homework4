@@ -100,7 +100,11 @@ describe('Posts', () => {
 
     const wrapper = mount(Posts, {router, store, localVue});
 
-    it('1 == 1', function () {
-        expect(true).toBe(true)
+    it('Posts has same amount of posts rendered', function () {
+        expect(wrapper.findAll(".post").length).toBe(testData.length)
+    });
+
+    it("Post create time is displayed in the correct format.", function () {
+       expect(wrapper.findAll(".post createTime")).toBe(true)
     });
 });
