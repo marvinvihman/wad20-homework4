@@ -104,6 +104,7 @@ describe('Posts', () => {
     it('Posts has same amount of posts rendered', function () {
         expect(wrapper.findAll(".post").length).toBe(wrapper.vm.posts.length)
     });
+
     for (let i = 0; i < wrapper.vm.posts.length; i++) {
         it("Post create time is displayed in the correct format.", function () {
             expect("Saturday, December 5, 2020 1:53 PM")
